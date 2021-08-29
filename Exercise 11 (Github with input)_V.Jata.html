@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>React getting started</title>
+  </head>
+  <body>
+    <!-- Root container for react components -->
+    <div id="root"></div>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+
+    <script type="text/babel">
+      const GithubWithInput = () => {
+        const [userInput, setUserInput] = React.useState([]);
+        const [keyword, setKeyword] = React.useState("");
+
+        const fetchData = () => {
+          const url = `https://api.github.com/search/repositories?q=${keyword}`;
+          fetch(url)
+            .then((response) => response.json())
+            .then((responseData) => {
+              setUserInput(responseData.items);
+            });
+        };
+
+        const handleChange = (e) => {
+          setKeyword(e.target.value);
+        };
+        const itemRows = userInput.map((github) => (
+          <tr key={github.id}>
+            <td>{github.full_name}</td>
+            <td>{github.html_url}</td>
+          </tr>
+        ));
+
+        return (
+          <div className="App">
+            <input type="text" onChange={handleChange} />
+            <button onClick={fetchData} value={keyword}>
+              Search{" "}
+            </button>
+            <table>
+              <tbody>
+                <tr>
+                  <th>Name</th>
+                  <th>URL</th>
+                </tr>
+                {itemRows}
+              </tbody>
+            </table>
+          </div>
+        );
+      };
+      ReactDOM.render(<GithubWithInput />, document.getElementById("root"));
+    </script>
+  </body>
+</html>

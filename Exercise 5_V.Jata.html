@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>React getting started</title>
+  </head>
+  <body>
+    <!-- Root container for react components -->
+    <div id="root"></div>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react@17/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+
+    <script type="text/babel">
+      function AgeCheck(props) {
+        const [user, setUser] = React.useState({ firstName: "", age: "" });
+
+        const inputChanged = (event) => {
+          setUser({ ...user, [event.target.name]: event.target.value });
+        };
+
+        let ageCheck = 0;
+        if (user.age >= 18) {
+          ageCheck = parseInt(user.age);
+          ageCheck = `Hello ${user.firstName}`;
+        } else {
+          ageCheck = `You are too young`;
+        }
+
+        const formSubmitted = (event) => {
+          event.preventDefault();
+        };
+
+        return (
+          <div>
+            <h4> {ageCheck} </h4>
+            <form onSubmit={formSubmitted}>
+              <label>
+                Name:
+                <input type="text" name="firstName" value={user.firstName} onChange={inputChanged} />
+              </label><br />             
+              <label>
+                Age:
+                <input type="text" name="age" value={user.age} onChange={inputChanged} />             
+              </label> <br />
+              <input type="submit" value="Submit" />
+            </form>
+          </div>
+        );
+      }
+
+      ReactDOM.render(<AgeCheck />, document.getElementById("root"));
+    </script>
+  </body>
+</html>

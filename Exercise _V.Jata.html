@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>React getting started</title>
+  </head>
+  <body>
+    <!-- Root container for react components -->
+    <div id="root"></div>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+
+    <script type="text/babel">
+      
+      function UserInput() {
+        //
+        // const person = {
+        //   name: "John",
+        //   age: 25
+        // }
+        // person.name = "jack";
+        // const nums = [1,3,34,5]
+        // nums.push(5);
+
+        // console.log(person)
+          // Arrow Functions
+        // function sayHello() {
+        //   console.log("hello");
+        // }
+        // const sayHello = name => 
+        //   console.log(`name ${name}`);
+        
+        // // only name don't need to put () or {}
+        // sayHello("Vullnet");
+
+        // // For each
+        // const fruits = ["Apples", "Blueberries", "Oranges"]
+        // fruits.forEach((fruit, index) => console.log(fruit))
+        // // MAP
+        // const singleFruit = fruits.map((fruit) =>fruit.slice(0, -1));
+        
+        //   const people = [
+        //     {id: 1, name: 'John'},
+        //     {id: 2, name: 'Bob'},
+        //     {id: 3, name: 'Dow'}
+        //   ];
+        // const people2 = people.filter(person => person.id !==2);
+        //   console.log(people2)
+        
+        // spread
+        
+        // const arr = [1,2,3]
+        // const arr2 = [...arr,4]
+        // // console.log(arr2) // it adds 4 to the arr. 
+        // const arr3 = [...arr.filter(something => something!=2)];
+          // console.log(arr3)
+          //it prints to the console 1, 3. 
+        // const person1 = {
+        //   name: "Vullnet",
+        //   age: "32"
+        // }
+        // const person2 = {
+        //   ...person1,
+        //   email: 'v.jata24@gmail'
+        // }
+        // console.log(person2);
+      //  //destrustructuring. 
+      //   const profile = {
+      //     name: 'John Doe',
+      //     address: {
+      //       street: '40 London',
+      //       city: 'London'
+      //     },
+      //     hobbies: ["sience", "movies"]
+      //   };
+
+      //   const  { name, address, hobbies } = profile 
+      //   const { street, city} = profile.address;
+        
+      //   console.log(profile.address)
+        //  in react is used this: 
+      //   this.state.profile;
+      //   this.props.name;
+      
+      // Classes
+      // functional components and class components. 
+        // method is a function inside a class. 
+      
+        // class Person {
+      //   constructor() {
+      //     this.name = "John"
+      //   }
+      // 
+      class Person {
+        constructor(name, age) {
+          this.name = name
+          this.age = age;
+        }
+        greet() {
+          return `Hello, my name is ${this.name} 
+          and i am ${this.age}`;
+        }
+      }
+      const person1 = new Person("John", 33);
+      const person2 = new Person("Ola", 31);
+
+      // console.log(person1.greet());
+      // Sublcasses
+      class Customer extends Person {
+        constructor(name, age, balance) {
+          super(name, age);
+          this.balance = balance;
+        }
+        info() {
+          return `${this.name} owes ${this.balance}`;
+        }
+      }
+      const customer1 = new Customer("Will", 20, 320);
+
+
+        return (
+          <div>
+            <p> Person: {person2.greet()}  </p>
+            <p> {customer.info()}</p>
+          </div>
+        );
+      }
+
+      ReactDOM.render(<UserInput />, document.getElementById("root"));
+    </script>
+  </body>
+</html>
+
+

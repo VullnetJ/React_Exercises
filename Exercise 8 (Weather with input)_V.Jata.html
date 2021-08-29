@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>React getting started</title>
+  </head>
+  <body>
+    <!-- Root container for react components -->
+    <div id="root"></div>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+
+    <script type="text/babel">
+      function WeatherWithInput(props) {
+        const [temperature, setTemperature] = React.useState("");
+        const [city, setCity] = React.useState("");
+        const [isWeather, setIsWeather] = React.useState("");
+        const [weatherIcon, setWeatherIcon] = React.useState("");
+        const [isReady, setReady] = React.useState(false);
+
+        const API_KEY = "";
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=`;
+
+        const fetchWeather = (e) => {
+          fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+              setTemperature(data.main.temp);
+              setIsWeather(data.weather[0].main);
+              setWeatherIcon(data.weather[0].icon);
+              setReady(true);
+            })
+            .catch((error) => console.log(error));
+        };
+
+        console.log({ city });
+
+        return (
+          <div>
+            <input value={city} onChange={(e) => setCity(e.target.value)} />
+
+            <button onClick={fetchWeather}>Search City</button>
+            <p>Temperature: {temperature} Celsius</p>
+            <p>Weather: {isWeather}</p>
+            <img src={`http://openweathermap.org/img/w/${weatherIcon}.png`} />
+          </div>
+        );
+      }
+      ReactDOM.render(<WeatherWithInput />, document.getElementById("root"));
+    </script>
+  </body>
+</html>
